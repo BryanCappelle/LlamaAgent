@@ -11,7 +11,7 @@ class MarkdownSectionChunker(Chunker):
     """Une section (## ou ###) = un chunk. Les sections longues sont redécoupées
     par mots, avec le titre répété en tête de chaque morceau."""
 
-    def __init__(self, max_words: int = 70, overlap_words: int = 15):
+    def __init__(self, max_words: int = 180, overlap_words: int = 30):
         if max_words <= 0:
             raise ValueError("max_words must be positive")
         if overlap_words < 0 or overlap_words >= max_words:
