@@ -1,6 +1,8 @@
+import os
 import json
 import re
 from pathlib import Path
+
 
 import numpy as np
 from fastembed import TextEmbedding
@@ -10,7 +12,7 @@ from rag.preprocessing.normalizer import TextNormalizer
 from rag.preprocessing.chunking.markdown_section_chunker import MarkdownSectionChunker
 
 
-MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+MODEL = os.environ["EMBEDDING_MODEL"]
 
 ROOT = Path(__file__).parent.parent.parent       # racine du projet (LlamaAgent/)
 CONTENT_DIR = ROOT / "content"               # tes fichiers .md

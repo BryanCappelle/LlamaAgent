@@ -1,10 +1,11 @@
 # tests/test_retrieval.py
+import os
 from pathlib import Path
 
 
 from rag.retrieval.retriever import Retriever
 
-MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+MODEL = os.environ["EMBEDDING_MODEL"]
 retriever = Retriever(Path(__file__).parent.parent / "rag/embeddings/index", MODEL)  # adapte le chemin à ton arborescence
 
 questions = [
