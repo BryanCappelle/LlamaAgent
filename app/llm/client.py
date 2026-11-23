@@ -5,6 +5,8 @@ from langchain_groq import ChatGroq
 
 from app.llm.models import MODELS
 from app.tools.schemas import TOOLS
+from app.llm.observability import log_tokens
+
 
 log = logging.getLogger(__name__)
 
@@ -27,7 +29,7 @@ def _build():
 
 llm = _build()
 
-
+@log_tokens
 def generate_with_fallback(messages: list[dict]):
     """Renvoie un AIMessage : .content (texte) et .tool_calls (liste de dicts name/args/id)."""
     try:
