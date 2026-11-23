@@ -29,6 +29,6 @@ GROQ = Provider(
 )
 
 MODELS = [
-    LanguageModel("qwen/qwen3.8-27b", GROQ, max_tokens=150),
-    LanguageModel("openai/gpt-oss-120b", GROQ, max_tokens=150),
+    LanguageModel("qwen/qwen3.8-27b", GROQ, max_tokens=250),
+    LanguageModel("openai/gpt-oss-120b", GROQ, max_tokens=250),
 ]
