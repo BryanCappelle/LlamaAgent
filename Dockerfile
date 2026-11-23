@@ -12,8 +12,7 @@ COPY . .
 ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
 
-ARG EMBEDDING_MODEL
-ENV EMBEDDING_MODEL=${EMBEDDING_MODEL}
+ENV EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 
 RUN python -m rag.embeddings.build_index
 
