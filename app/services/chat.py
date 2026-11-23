@@ -36,11 +36,6 @@ NO_EXTRACT = (
     "propose une rubrique (projets, technologies, musique)."
 )
 
-ACTION_REPLIES = {
-    "navigate": "Cap sur cette étoile, je t'y emmène !",
-    "play_music": "Que la musique des étoiles résonne !",
-    "open_contact_form": "Je t'ouvre le formulaire, à toi d'écrire à Bryan !",
-}
 
 retriever = Retriever(INDEX_DIR, EMBEDDING_MODEL)
 
@@ -65,7 +60,5 @@ def answer(question: str, history: list[dict] | None = None, min_score: float = 
 
     actions = [a for tc in msg.tool_calls if (a := to_action(tc["name"], tc["args"]))]
     reply = msg.content if isinstance(msg.content, str) else ""
-    if actions and not reply.strip():
-        reply = ACTION_REPLIES[actions[0]["type"]]
 
     return {"reply": reply, "actions": actions, "extracts": extracts, "messages": messages}
