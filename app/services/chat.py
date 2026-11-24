@@ -39,6 +39,13 @@ NO_EXTRACT = (
 
 retriever = Retriever(INDEX_DIR, EMBEDDING_MODEL)
 
+EMPTY_REPLY = "I couldn't come up with a response just now. Please try again."
+ACTION_REPLIES = {
+    "play_music": "I'm playing Bryan's music now.",
+    "navigate": "I'm taking you to that page now.",
+    "open_contact_form": "I'm opening the contact form now.",
+}
+
 
 def build_messages(question: str, extracts: list[dict], history: list[dict]) -> list[dict]:
     if extracts:
@@ -60,5 +67,8 @@ def answer(question: str, history: list[dict] | None = None, min_score: float = 
 
     actions = [a for tc in msg.tool_calls if (a := to_action(tc["name"], tc["args"]))]
     reply = msg.content if isinstance(msg.content, str) else ""
+    if not reply.strip():
+        action_type = actions[0]["type"] if actions else None
+        reply = ACTION_REPLIES.get(action_type, EMPTY_REPLY)
 
     return {"reply": reply, "actions": actions, "extracts": extracts, "messages": messages}
